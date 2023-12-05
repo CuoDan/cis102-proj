@@ -115,7 +115,7 @@ listing_count = len(map_listing)
 
 st.write("---")
 
-st.write("The table below shows the housing rental(s) in descending price:")
+st.write("The table below shows the housing rental(s) that match your requirements:")
 st.write(table_listing)
 
 st.subheader(f"Total {listing_count} housing rental(s) are found in {select_neighbourhood}, {select_burough} with price between {min} dollars and {max} dollars")
