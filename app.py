@@ -119,24 +119,26 @@ st.write("---")
 ####################
 ######## Map
 ####################
-Top = map_listing.values[0,:]
-m = folium.Map(location=Top[1:-1], zoom_start=16)
+if listing_count != 0:
+    Top = map_listing.values[0,:]
+    m = folium.Map(location=Top[1:-1], zoom_start=16)
 
-tooltip = "Tooltip"
-for j in range(listing_count):
-    name, lat, lon, price = map_listing.values[j,:]
-    host_name, room_type = info_listing.values[j,:]
-    folium.Marker(
-            (lat,lon), popup=f"""
-                        <div style="width: 150px;">
-                            <p>Name: {name}</p>
-                            <p>Host name: {host_name}</p>
-                            <p>Room type: {room_type}</p>
-                        </div>
-                        """ , tooltip=f"Tooltip: ${price}"
-                        ).add_to(m)
+    tooltip = "Tooltip"
+    for j in range(listing_count):
+        name, lat, lon, price = map_listing.values[j,:]
+        host_name, room_type = info_listing.values[j,:]
+        folium.Marker(
+                (lat,lon), popup=f"""
+                            <div style="width: 150px;">
+                                <p>Name: {name}</p>
+                                <p>Host name: {host_name}</p>
+                                <p>Room type: {room_type}</p>
+                            </div>
+                            """ , tooltip=f"Tooltip: ${price}"
+                            ).add_to(m)
 
-# call to render Folium map in Streamlit
-folium_static(m)
+    # call to render Folium map in Streamlit
+
+    folium_static(m)
 
 st.write("This app is developed by Cuong Dang.")
