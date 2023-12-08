@@ -4,6 +4,7 @@
 
 import pandas as pd
 import streamlit as st
+import numpy as np
 from PIL import Image
 
 import math
@@ -60,16 +61,11 @@ st.write("---")
 #####Select borough
 #######################
 
-boroughs = df["neighbourhood_group"]
-
-borough = []
-for x in boroughs:
-    if x not in borough:
-        borough.append(x)
+boroughs = df["neighbourhood_group"].unique().tolist()
 
 st.subheader('Select the area for your AirBnB')
 
-select_burough = st.selectbox("Your selected borough:", borough, 0)   
+select_burough = st.selectbox("Your selected borough:", boroughs, 0)   
 
 ####################################
 #Select neighborhood in the borough
@@ -77,16 +73,15 @@ select_burough = st.selectbox("Your selected borough:", borough, 0)
 
 neighbourhood = []
 
-    # Loop through each row using iterrows()    
-for index, row in df.iterrows():
-    # Access data in the row using column names
-    neighbourhoods = row['neighbourhood']
-    neigh_group = row['neighbourhood_group']
-    
+A = df.values.tolist()
+
+for row in A:
+    neighbourhoods = row[5]
+    neigh_group = row[4]
+
     if neigh_group == select_burough:
         if neighbourhoods not in neighbourhood:
             neighbourhood.append(neighbourhoods)
-
 
 select_neighbourhood = st.selectbox(f"Your selected neighborhood in {select_burough}:", neighbourhood, 0)
 
